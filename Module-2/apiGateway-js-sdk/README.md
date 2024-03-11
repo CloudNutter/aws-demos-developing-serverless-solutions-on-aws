@@ -1,7 +1,9 @@
 # Prerequisites
-For the JavaScript SDK to work your APIs need to support CORS. The Amazon API Gateway developer guide explains how to [setup CORS for an endpoint]().
+
+For the JavaScript SDK to work your APIs need to support CORS. The Amazon API Gateway developer guide explains how to [setup CORS for an endpoint](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html).
 The generated SDK depends on third-party libraries. Include all of the scripts in your webpage
 
+```html
     <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
     <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
     <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
@@ -13,18 +15,19 @@ The generated SDK depends on third-party libraries. Include all of the scripts i
     <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
     <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
     <script type="text/javascript" src="apigClient.js"></script>
+```
 
-# Use the SDK in your project
+## Use the SDK in your project
 
 To initialize the most basic form of the SDK:
 
-```
+```js
 var apigClient = apigClientFactory.newClient();
 ```
 
 Calls to an API take the form outlined below. Each API call returns a promise, that invokes either a success and failure callback
 
-```
+```js
 var params = {
     //This is where any header, path, or querystring request params go. The key is the parameter named as defined in the API
     param0: '',
@@ -53,10 +56,11 @@ apigClient.methodName(params, body, additionalParams)
     });
 ```
 
-#Using AWS IAM for authorization
+## Using AWS IAM for authorization
+
 To initialize the SDK with AWS Credentials use the code below. Note, if you use credentials all requests to the API will be signed. This means you will have to set the appropiate CORS accept-* headers for each request.
 
-```
+```js
 var apigClient = apigClientFactory.newClient({
     accessKey: 'ACCESS_KEY',
     secretKey: 'SECRET_KEY',
@@ -65,14 +69,12 @@ var apigClient = apigClientFactory.newClient({
 });
 ```
 
-#Using API Keys
+## Using API Keys
+
 To use an API Key with the client SDK you can pass the key as a parameter to the Factory object. Note, if you use an apiKey it will be attached as the header 'x-api-key' to all requests to the API will be signed. This means you will have to set the appropiate CORS accept-* headers for each request.
 
-```
+```js
 var apigClient = apigClientFactory.newClient({
     apiKey: 'API_KEY'
 });
 ```
-
-
-
